@@ -15,16 +15,13 @@ int main(int argc, char const *argv[])
             exit(-1);
             break;
         case 0:
-            //char *args[]={"./file. c",NULL);
             printf("%s", argv[1]);
-            execvp(argv[1], argv);
-            exit(0);
-            break;
+            execvp(argv[1], &argv[1]);
+            exit(1);
         default:
             printf("Parent with id: %d\n", getpid());
-            // wait(rv);
-            printf("parant exit code %d", WEXITSTATUS(rv));
             waitpid(pid, &rv, 0);
+            printf("parant exit code %d", WEXITSTATUS(rv));
             break;
     }
 
