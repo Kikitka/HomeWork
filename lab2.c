@@ -13,6 +13,7 @@ int main(int argc, char const *argv[])
     int positionSymbol = 1;
     int userLineNumber;
     int position;
+    int lineLength = 0;
 
     arrSymbol[0] = -1;
     // Открытие файла
@@ -48,10 +49,11 @@ int main(int argc, char const *argv[])
     else
     {
         position = lseek(fd, arrSymbol[userLineNumber - 1] + 1, SEEK_SET);
+        lineLength = arrSymbol[userLineNumber]-arrSymbol[userLineNumber - 1];
     }
     // Очистка буфера и запись в него строки
     memset(buf, NULL, 1000);
-    countBite = read(fd, buf, 1000);
+    countBite = read(fd, buf, lineLength);
     i = 0;
     while(buf[i] != '\n')
     {
